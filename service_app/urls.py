@@ -17,4 +17,11 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-urlpatterns = [path('', views.home, name='home')]
+urlpatterns = [path('', views.home, name='home'),
+               path('sign_up', views.sign_up, name='sign_up'),
+               path('services', views.services, name='services'),
+               path('service/<pk>/', views.service, name='service'),
+               path('car/desc/<car>/<pk>/', views.car_desc, name='car_desc'),
+               path('car/<pk>/', views.car, name='car'),
+               path('appointment', views.appointment, name='appointment')
+               ]

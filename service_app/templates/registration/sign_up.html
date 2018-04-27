@@ -1,0 +1,21 @@
+
+{% extends 'service_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div style="width: 400px; margin: 50px auto" class="align-center">
+    <h2 class="box-header">Регистрация</h2>
+
+<form class="margin-top-30" method="post">
+{% csrf_token %}
+  {{ user_form.as_p }}
+  {{ client_form.as_p}}
+  <input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Отправить" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+</div>
+{% endblock %}

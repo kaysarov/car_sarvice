@@ -1,0 +1,25 @@
+{% extends 'service_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div style="width: 400px; margin: 50px auto" class="align-center">
+    <h2 class="box-header">Авторизация</h2>
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>У вашей учетной записи нет доступа к этой странице. Чтобы продолжить, войдите в систему с учетной записью, имеющей доступ.</p>
+    {% endif %}
+{% endif %}
+
+<form class="margin-top-30" method="post" action="{% url 'login' %}">
+{% csrf_token %}
+    {{form.as_p}}
+  <input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Войти" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+    <p class="description"><a href="{% url 'sign_up' %}">Регистрация</a></p>
+</div>
+{% endblock %}

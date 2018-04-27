@@ -1,0 +1,30 @@
+{% extends 'service_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="row margin-top-20">
+	<div class="column column-1-4">
+		<ul class="accordion margin-top-20 clearfix">
+			{% for i, j in services.items %}
+			<li>
+				<div id="accordion-{{forloop.counter}}">
+					<h4>{{ i }}</h4>
+				</div>
+				<p class="description">{% for s in j %} {% for f, h in s.items %}{% if f != 'null' %}<a href="{% url 'car_desc' car f %}">{{ h }}</a> {% else %} {{ h }} {% endif %}<br>{% endfor %}{% endfor %}</>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="column column-3-4 margin-top-20">
+		<h2 class="box-header">{{desc}}</h2>
+		<div class="row">
+			{{desc.description|safe}}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

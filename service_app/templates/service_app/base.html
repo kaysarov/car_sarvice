@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<title>CarService - Mechanic Auto Shop Template</title>
+		<!--meta-->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.2" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="Mechanic, Car, Auto" />
+		<meta name="description" content="Responsive Mechanic Auto Shop Template" />
+		<!--slider revolution-->
+		<link rel="stylesheet" type="text/css" href="static/rs-plugin/css/settings.css" media="screen" />
+		<!--style-->
+		<link href='//fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,600,700,800&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{% static 'style/reset.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/superfish.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/prettyPhoto.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/jquery.qtip.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/animations.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/responsive.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'style/odometer-theme-default.css' %}">
+		<!--fonts-->
+		<link rel="stylesheet" type="text/css" href="{% static 'fonts/streamline-small/style.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'fonts/template/styles.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'fonts/social/styles.css' %}">
+		<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        {% block head %}
+   {% endblock %}
+	</head>
+	<body>
+		<div class="site-container">
+			<div class="header-top-bar-container clearfix">
+				<div class="header-top-bar">
+					<ul class="contact-details clearfix">
+						<li class="template-phone">
+							+7 (800) 555 55 55
+						</li>
+						<li class="template-mail">
+							<a href="mailto:carservice@mail.com">carservice@mail.ru</a>
+						</li>
+						<li class="template-clock">
+							Пн - Сб: 9:00 - 20:00
+						</li>
+					</ul>
+					<ul class="social-icons">
+						<li>
+							<a title="" href="#" class="social-google-plus"></a>
+						</li>
+						<li>
+							<a title="" href="#" class="social-instagram"></a>
+						</li>
+						<li>
+							<a title="" href="#" class="social-vk"></a>
+						</li>
+						{% if user.is_authenticated %}
+						 <li><a href="#">Личный кабинет</a></li>
+						 <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
+                       {% else %}
+                         <li><a href="{% url 'login'%}?next={{request.path}}">Войти</a></li>
+                       {% endif %}
+					</ul>
+				</div>
+				<a href="#" class="header-toggle template-arrow-up"></a>
+			</div>
+			<div class="header-container">
+			<!--<div class="header-container sticky">-->
+				<div class="vertical-align-table column-1-1">
+					<div class="header clearfix">
+						<div class="logo vertical-align-cell">
+							<h1><a href="{% url 'home' %}" title="CarService">АВТОСЕРВИС</a></h1>
+						</div>
+						<a href="#" class="mobile-menu-switch vertical-align-cell">
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+						</a>
+						<div class="menu-container clearfix vertical-align-cell">
+							<nav>
+								<ul class="sf-menu">
+									<li>
+										<a href="{% url 'home' %}" title="Home">
+											О компании
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'services' %}" title="Services">
+											Все услуги
+										</a>
+									</li>
+                                    <li class="left-flyout">
+										<a href="contact.html" title="Contact">
+											Контакты
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'appointment' %}" title="Appointment">
+											Оставить заявку
+										</a>
+									</li>
+								</ul>
+							</nav>
+							<div class="mobile-menu-container">
+								<div class="mobile-menu-divider"></div>
+								<nav>
+								<ul class="mobile-menu collapsible-mobile-submenus">
+									<li class="selected">
+										<a href="index.html" title="Home">
+											О компании
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'services' %}" title="Services">
+											Все услуги
+										</a>
+									</li>
+                                    <li class="left-flyout">
+										<a href="contact.html" title="Contact">
+											Контакты
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'appointment' %}" title="Appointment">
+											Оставить заявку
+										</a>
+									</li>
+								</ul>
+							</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row gray full-width page-header">
+				</div>
+			{% block content %}
+            {% endblock %}
+            <div class="row dark-gray footer-row full-width padding-top-30 padding-bottom-50">
+				<div class="row padding-bottom-30">
+					<div class="column column-1-3">
+						<ul class="contact-details-list">
+							<li class="sl-small-location-map">
+								<p>Москва<br>
+								Нижегородская ул. 102 с. 9</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column column-1-3">
+						<ul class="contact-details-list">
+							<li class="sl-small-phone-circle">
+								<p>Бесплатный звонок<br>
+								8 800 555 55 55</p>
+							</li>
+						</ul>
+					</div>
+					<div class="column column-1-3">
+						<ul class="contact-details-list">
+							<li class="sl-small-truck-tow">
+								<p>24/7 Помощь на дорогах<br>
+								8 800 555 55 00</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		<a href="#top" class="scroll-top animated-element template-arrow-up" title="Scroll to top"></a>
+		<div class="background-overlay"></div>
+		<!--js-->
+		<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery-migrate-1.4.1.min.js' %}"></script>
+		<!--slider revolution-->
+		<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ba-bbq.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery-ui-1.11.4.custom.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.isotope.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.carouFredSel-6.2.1-packed.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.touchSwipe.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.transit.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.hint.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.costCalculator.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.parallax.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.qtip.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.blockUI.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/odometer.min.js' %}"></script>
+	</body>
+</html>
