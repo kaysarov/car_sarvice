@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'service_app',
     'phonenumber_field',
-    'rest_framework',
     'django_summernote',
     'django_select2',
 ]
