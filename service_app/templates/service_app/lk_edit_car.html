@@ -8,13 +8,14 @@
 {% block lk_content %}
 
 <div class="column column-3-4 align-center">
-<h3 class="row align-center">Новая заявка</h3>
+<h3 class="row align-center">Редактировать Информацию об автомобиле</h3>
 
 <form method="post" class="margin-top-20">
 	{% csrf_token %}
 	<table class="table-form">{{form}}</table>
-	<input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Отправить" />
+	<input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Сохранить" />
 	<input type="hidden" name="next" value="{{ next }}" />
 </form>
+<p class="description"><a href="{% url 'del_car' pk=pk car=car %}">Удалить автомобиль</a></p>
 </div>
 {% endblock %}

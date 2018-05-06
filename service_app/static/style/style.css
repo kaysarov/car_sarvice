@@ -147,7 +147,7 @@ table
 }
 table td, table th
 {
-	padding: 18px 30px;
+	padding: 10px 15px;
 	font-family: 'Open Sans';
 	font-size: 14px;
 	line-height: 24px;
@@ -158,12 +158,25 @@ table td, table th
 }
 table td:first-child, table th:first-child
 {
-	text-align: right;
+	text-align: left;
 	border-left: none;
 }
 table tr:nth-child(odd)
 {
 	background: #F5F5F5;
+}
+table.table-form td:first-child, table.table-form th:first-child
+{
+	text-align: right;
+	border-left: none;
+}
+table.table-form td, table.table-form th
+{
+	border-left: none;
+}
+table.table-form tr:nth-child(odd)
+{
+	background: none;
 }
 .radius
 {

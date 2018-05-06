@@ -8,7 +8,7 @@
 {% block lk_content %}
 
 <div class="column column-3-4 align-center">
-<h3 class="row align-center">Новая заявка</h3>
+<h3 class="row align-center">Редактировать данные профиля</h3>
 
 <form method="post" class="margin-top-20">
 	{% csrf_token %}
@@ -16,5 +16,6 @@
 	<input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Отправить" />
 	<input type="hidden" name="next" value="{{ next }}" />
 </form>
+<p class="description"><a href="{% url 'change_password' %}">Сменить пароль</a></p>
 </div>
 {% endblock %}

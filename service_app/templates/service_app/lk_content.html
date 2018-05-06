@@ -1,0 +1,32 @@
+{% extends 'service_app/lk.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block lk_content %}
+
+<div class="column column-3-4">
+<h3 class="row align-center">Ваши автомобили</h3>
+		<table class="margin-top-20">
+			<tbody>
+				<tr>
+					<th>Автомобиль</th>
+					<th>Пробег</th>
+					<th>Дата производства</th>
+					<th>Номерной знак</th>
+				</tr>
+				{% for i in cars  %}
+				<tr>
+					<th><a href="{% url 'edit_car' pk=pk car=i.id%}">{{i.car}}</a></th>
+					<th>{{i.distance}}</th>
+					<th>{{i.year_of_manufacture}}</th>
+					<th>{{i.numberplate}}</th>
+				</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+</div>
+{% endblock %}

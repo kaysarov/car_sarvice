@@ -1,0 +1,27 @@
+{% extends 'service_app/car_desc.html' %}
+		{% block price %}
+
+<div class="row">
+	<h3 class="row align-center">Стоимость работ</h3>
+		<table class="margin-top-10">
+			<tbody>
+				<tr>
+					<th>Наименование работ</th>
+					<th>Количество нормо-часов</th>
+					<th>Стоимость нормо-часа (руб.)</th>
+					<th>Общая стоимость (руб.)</th>
+				</tr>
+				{% for i in price %}
+				<tr>
+					<th>{{i.title}}</th>
+					<th>{{i.hour_norm}}</th>
+					<th>{{i.price_per_hour}}</th>
+					<th>{{i.total}}</th>
+				</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+</div>
+<br><br>
+{% endblock %}

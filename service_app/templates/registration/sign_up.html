@@ -12,8 +12,10 @@
 
 <form class="margin-top-30" method="post">
 {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ client_form.as_p}}
+    <table class="table-form">
+  {{ user_form}}
+  {{ client_form}}
+    </table>
   <input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Отправить" />
   <input type="hidden" name="next" value="{{ next }}" />
 </form>

@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('service_app.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('select2/', include('django_select2.urls'))
 ]
 
 if settings.DEBUG:

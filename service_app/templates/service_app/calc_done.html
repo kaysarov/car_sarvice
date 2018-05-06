@@ -1,0 +1,38 @@
+{% extends 'service_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="row margin-top-58 align-center padding-bottom-87">
+	<h2 class="box-header">Калькулятор ремонта</h2>
+	<table class="margin-top-20 align-center">
+		<tbody>
+			<tr>
+				<th>Автомобиль</th>
+				<th>Наименование работ</th>
+				<th>Количество нормо-часов</th>
+				<th>Стоимость нормо-часа (руб.)</th>
+				<th>Количество</th>
+				<th>Итого (руб.)</th>
+			</tr>
+			{% for i in job %}
+			<tr>
+				<th>{{i.car}}</th>
+				<th>{{i.title}}</th>
+				<th>{{i.hour_norm}}</th>
+				<th>{{i.price_per_hour}}</th>
+				<th>{{i.col}}</th>
+				<th>{{i.total}}</th>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+<p class="description">Общая стоимость выбранных работ = {{sum}} руб.</p>
+<p class="description">Время необходимое для выполнения работ = {{time}} час.</p>
+</div>
+{% endblock %}

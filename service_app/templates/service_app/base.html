@@ -55,7 +55,11 @@
 							<a title="" href="#" class="social-vk"></a>
 						</li>
 						{% if user.is_authenticated %}
-						 <li><a href="#">Личный кабинет</a></li>
+						{% if user.is_superuser %}
+						 <li><a href="{% url 'admin:index' %}">Личный кабинет</a></li>
+						{% else %}
+						<li><a href="{% url 'lk' pk=user.id %}">Личный кабинет</a></li>
+						{% endif %}
 						 <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
                        {% else %}
                          <li><a href="{% url 'login'%}?next={{request.path}}">Войти</a></li>
@@ -89,15 +93,18 @@
 											Все услуги
 										</a>
 									</li>
+									<li>
+										<a href="{% url 'calc' %}" title="Services">
+											Калькулятор ремонта
+										</a>
+									</li>
                                     <li class="left-flyout">
 										<a href="contact.html" title="Contact">
 											Контакты
 										</a>
 									</li>
 									<li>
-										<a href="{% url 'appointment' %}" title="Appointment">
-											Оставить заявку
-										</a>
+										<a href="{% if user.is_authenticated %} {% url 'appointment' pk=user.id %} {% else %} {% url 'login'%}?next={{request.path}}{% endif %}" title="Appointment">Оставить заявку</a>
 									</li>
 								</ul>
 							</nav>
@@ -115,15 +122,18 @@
 											Все услуги
 										</a>
 									</li>
+									<li>
+										<a href="{% url 'calc' %}" title="Services">
+											Калькулятор ремонта
+										</a>
+									</li>
                                     <li class="left-flyout">
 										<a href="contact.html" title="Contact">
 											Контакты
 										</a>
 									</li>
 									<li>
-										<a href="{% url 'appointment' %}" title="Appointment">
-											Оставить заявку
-										</a>
+										<a href="{% if user.is_authenticated %} {% url 'appointment' pk=user.id %} {% else %} {% url 'login'%}?next={{request.path}}{% endif %}" title="Appointment">Оставить заявку</a>
 									</li>
 								</ul>
 							</nav>
@@ -136,8 +146,8 @@
 				</div>
 			{% block content %}
             {% endblock %}
-            <div class="row dark-gray footer-row full-width padding-top-30 padding-bottom-50">
-				<div class="row padding-bottom-30">
+            <div class="row dark-gray footer-row full-width padding-top-30 padding-bottom-30">
+				<div class="row padding-bottom-20">
 					<div class="column column-1-3">
 						<ul class="contact-details-list">
 							<li class="sl-small-location-map">
@@ -163,6 +173,7 @@
 						</ul>
 					</div>
 				</div>
+				<div class="row align-center"> <span class="copyright">© 2018 Kaysarov. </span> </div>
 			</div>
 		<a href="#top" class="scroll-top animated-element template-arrow-up" title="Scroll to top"></a>
 		<div class="background-overlay"></div>

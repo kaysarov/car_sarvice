@@ -1,0 +1,47 @@
+{% extends 'service_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="row margin-top-70 align-center padding-bottom-87">
+    <h2 class="box-header">Калькулятор работ</h2>
+
+<form method="post" class="margin-top-20">
+{% csrf_token %}
+{{form}}
+  <input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Выбрать" />
+</form> <br> <br>
+{% if request.method == 'POST' %}
+	<form method="post" action="{% url 'calc_done' pk=car%}">
+		{% csrf_token %}
+	<table>
+	<tbody>
+		<tr>
+			<th>Категория работ</th>
+			<th>Виды работ</th>
+			<th>Количество</th>
+			<th>Количество нормо-часов</th>
+			<th>Стоимость нормо-часа (руб.)</th>
+		</tr>
+		{% for i in job %}
+		<tr>
+			<td>{{i.category_job}}</td>
+			<td>{{i.choices}}</td>
+			<td>{{i.col}}</td>
+			<td>{{i.hour_norm}}</td>
+			<td>{{i.price_per_hour}}</td>
+		</tr>
+		{% endfor %}
+
+	</tbody>
+	</table>
+		<input class="more margin-top-20 display-block submit-contact-form" type="submit" value="Рассчитать стоимость" />
+</form>
+{% endif %}
+	{{col}}
+</div>
+
+{% endblock %}

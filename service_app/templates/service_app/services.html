@@ -7,35 +7,38 @@
 
 {% block content %}
 
-<div class="row margin-top-20">
-	<div class="column column-1-3">
-		<h2 class="header">Выберите услугу</h2>
-		<ul class="accordion margin-top-40 clearfix">
+<div class="row margin-top-30 padding-bottom-20">
+	<h2 class="box-header">Все услуги</h2>
+	<div class="row margin-top-20">
+	<div class="column column-1-2">
+		<h3 class="align-center">Cправочная информация об услугах</h3>
+		<ul class="accordion margin-top-20 clearfix">
 			{% for i, j in services.items %}
 			<li>
 				<div id="accordion-{{forloop.counter}}">
 					<h4>{{ i }}</h4>
 				</div>
-				<p class="description">{% for s in j %} {% for f, h in s.items %}{% if f != 'null' %}<a href="{% url 'service' f %}">{{ h }}</a>{% else %} {{ h }} {% endif %} <br>{% endfor %}{% endfor %}</p>
+				<p class="description">{% for s in j %} {% for f, h in s.items %}{% if f != 'null' %}<a href="{% url 'service' pk=f %}">{{ h }}</a>{% else %} {{ h }} {% endif %} <br>{% endfor %}{% endfor %}</p>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="column column-1-3">
-		<h2 class="header">Выберите Автомобиль</h2>
-		<ul class="accordion margin-top-40 clearfix">
+	<div class="column column-1-2">
+		<h3 class="align-center">Справочная информация об автомобилях</h3>
+		<ul class="accordion margin-top-20 clearfix">
 			{% for i, j in cars.items %}
 			<li>
 				<div id="accordion-99{{forloop.counter}}">
 					<h4>{{ i }}</h4>
 				</div>
-				<p class="description">{% for s in j %} {% for f, h in s.items %}<a href="{% url 'car' f %}">{{ h }}</a> <br>{% endfor %}{% endfor %}</p>
+				<p class="description">{% for s in j %} {% for f, h in s.items %}<a href="{% url 'car' pk=f %}">{{ h }}</a> <br>{% endfor %}{% endfor %}</p>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
-
 </div>
+</div>
+
 
 
 {% endblock %}

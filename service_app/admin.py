@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
+
 class Jobs(admin.TabularInline):
     model = Jobs
     extra = 0
@@ -12,7 +13,7 @@ class Jobs(admin.TabularInline):
 class DetailOrders(admin.TabularInline):
     model = DetailOrders
     extra = 0
-    fields = ('order', 'job', 'employee', 'registration_date', 'execution_date', 'status', 'number', 'total')
+    fields = ('order', 'job', 'employee', 'registration_date', 'execution_date', 'status', 'number')
 
 
 class ClientCars(admin.TabularInline):
@@ -72,6 +73,5 @@ class CategoryJob(admin.ModelAdmin):
 class Orders(admin.ModelAdmin):
     fields = ['status', 'client', 'client_car', ('registration_date', 'execution_date'), 'employee']
     list_display = ('status', 'client', 'client_car', 'registration_date', 'employee')
-    list_filter = ('client', 'status', 'employee')
+    list_filter = ('status', 'employee')
     inlines = [DetailOrders]
-

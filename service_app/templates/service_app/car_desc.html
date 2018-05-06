@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="row margin-top-20">
+<div class="row margin-top-30 padding-bottom-20">
 	<div class="column column-1-4">
 		<ul class="accordion margin-top-20 clearfix">
 			{% for i, j in services.items %}
@@ -14,7 +14,7 @@
 				<div id="accordion-{{forloop.counter}}">
 					<h4>{{ i }}</h4>
 				</div>
-				<p class="description">{% for s in j %} {% for f, h in s.items %}{% if f != 'null' %}<a href="{% url 'car_desc' car f %}">{{ h }}</a> {% else %} {{ h }} {% endif %}<br>{% endfor %}{% endfor %}</>
+				<p class="description">{% for s in j %} {% for f, h in s.items %}{% if f != 'null' %}<a href="{% url 'car_desc' car=car pk=f %}">{{ h }}</a> {% else %} {{ h }} {% endif %}<br>{% endfor %}{% endfor %}</>
 			</li>
 			{% endfor %}
 		</ul>
@@ -24,7 +24,11 @@
 		<div class="row">
 			{{desc.description|safe}}
 		</div>
+		{% block price %}
+    {% endblock %}
+
 	</div>
 </div>
 
 {% endblock %}
+

@@ -11,13 +11,14 @@ class Cars(models.Model):
     class Meta:
         verbose_name = "Автомобиль"
         verbose_name_plural = "Автомобили"
+        ordering = ('manufacturer', 'model',)
         
     def __str__(self):
         return str(self.manufacturer) + ' ' + str(self.model)
 
 
 class DescriptionCar(models.Model):
-    car = models.OneToOneField(Cars, on_delete=models.CASCADE, verbose_name="Автомобиль", unique=True)
+    car = models.OneToOneField(Cars, on_delete=models.CASCADE, verbose_name="Автомобиль")
     description = models.TextField("Описание")
 
     class Meta:
@@ -53,7 +54,7 @@ class CategoryJob(models.Model):
 
 class DescriptionCategoryJob(models.Model):
     category_job = models.OneToOneField(CategoryJob, on_delete=models.CASCADE, verbose_name="Категория работ")
-    description = models.TextField("Описание")
+    description = models.TextField("Описание", blank=True)
 
     class Meta:
         verbose_name = "Описание"
@@ -66,7 +67,7 @@ class DescriptionCategoryJob(models.Model):
 class DescriptionCategoryForCar(models.Model):
     car = models.ForeignKey(Cars, on_delete=models.CASCADE, verbose_name="Автомобиль")
     category_job = models.ForeignKey(CategoryJob, on_delete=models.CASCADE, verbose_name="Категория работ")
-    description = models.TextField("Описание", unique=True)
+    description = models.TextField("Описание", blank=True)
 
     class Meta:
         verbose_name = "Описание работы"
@@ -80,7 +81,7 @@ class Jobs(models.Model):
     title = models.CharField("Работа", max_length=100)
     hour_norm = models.FloatField("Нормо-час", max_length=10)
     price_per_hour = models.FloatField("Цена за час", max_length=10)
-    car = models.ForeignKey(Cars, on_delete=models.CASCADE, blank=True, verbose_name="Автомобиль")
+    car = models.ForeignKey(Cars, on_delete=models.CASCADE, verbose_name="Автомобиль")
     category_job = models.ForeignKey(CategoryJob, on_delete=models.CASCADE, verbose_name="Категория работ")
     
     class Meta:
@@ -97,7 +98,7 @@ class Employees(models.Model):
     name = models.CharField("Имя", max_length=50)
     surname = models.CharField("Фамилия", max_length=50)
     patronymic = models.CharField("Отчество", max_length=50, blank=True)
-    birth_date = models.DateField("Дата рождения", blank=True)
+    birth_date = models.DateField("Дата рождения", blank=True, null=True)
     passport = models.CharField("Серия и номер паспорта", max_length=10)
     location = models.CharField("Адрес", max_length=100, blank=True)
     job = models.ManyToManyField(Jobs, blank=True)
@@ -153,10 +154,10 @@ class ClientCars(models.Model):
 class Orders(models.Model):
     client_car = models.ForeignKey(ClientCars, on_delete=models.CASCADE, verbose_name="Автомобиль")
     client = models.ForeignKey(Clients, on_delete=models.CASCADE, verbose_name="Клиент")
-    employee = models.ForeignKey(Employees, on_delete=models.CASCADE, verbose_name="Сотрудник")
+    employee = models.ForeignKey(Employees, on_delete=models.CASCADE, verbose_name="Сотрудник", null=True)
     status = models.BooleanField("Статус заказа", default=0)
     registration_date = models.DateTimeField("Дата оформления")
-    execution_date = models.DateTimeField("Дата исполнения")
+    execution_date = models.DateTimeField("Дата исполнения", null=True)
     
     class Meta:
         verbose_name = "Заказ"
@@ -172,9 +173,8 @@ class DetailOrders(models.Model):
     job = models.ForeignKey(Jobs, on_delete=models.CASCADE, verbose_name="Работа")
     status = models.BooleanField("Статус заказа", default=0)
     registration_date = models.DateTimeField("Дата оформления")
-    execution_date = models.DateTimeField("Дата исполнения")
+    execution_date = models.DateTimeField("Дата исполнения", null=True)
     number = models.IntegerField("Количество", default=1)
-    total = models.FloatField("Итого", default=1)
     
     class Meta:
         verbose_name = "Работа"
@@ -182,6 +182,14 @@ class DetailOrders(models.Model):
 
     def __str__(self):
         return str(self.order)
+
+
+def group_required(*group_names):
+    def in_groups(user):
+        if user.is_superuser or bool(user.groups.filter(name__in=group_names)):
+            return True
+        return False
+    return user_passes_test(in_groups)
 
 
 def sidebar_service():
@@ -208,7 +216,7 @@ def sidebar_car():
         y = []
         for j in x:
             if j.car.manufacturer == i.manufacturer:
-                y.append({j.id: j.car.model})
+                y.append({j.car.id: j.car.model})
         if y:
             category[i.manufacturer] = y
     return category
@@ -233,9 +241,27 @@ def sidebar_service_car(pk):
     return category
 
 
-def group_required(*group_names):
-    def in_groups(user):
-        if user.is_superuser or bool(user.groups.filter(name__in=group_names)):
-            return True
-        return False
-    return user_passes_test(in_groups)
+def price_list(car_id, pk):
+    desc = DescriptionCategoryForCar.objects.get(id=pk)
+    prise_list = Jobs.objects.filter(category_job_id=desc.category_job_id, car_id=car_id)
+    for i in prise_list:
+        i.total = i.hour_norm * i.price_per_hour
+    return prise_list
+
+
+def calculate(request, pk):
+    sum = 0
+    time = 0
+    choices = request.POST.getlist('choices')
+    col = request.POST.getlist('col')
+    jobs = Jobs.objects.filter(car_id=int(pk))
+    job = []
+    for i in range(len(jobs)):
+        for j in choices:
+            if jobs[i].id == int(j):
+                jobs[i].total = jobs[i].hour_norm * jobs[i].price_per_hour * int(col[i])
+                jobs[i].col = int(col[i])
+                sum += jobs[i].total
+                time += jobs[i].hour_norm * int(col[i])
+                job.append(jobs[i])
+    return job, sum, time

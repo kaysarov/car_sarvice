@@ -25,7 +25,7 @@ SECRET_KEY = '0$bcyu$jeci^3%l0%05x(_ffl1wqqjjrf-j1ijog+ux8uc9yy$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'django_summernote',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

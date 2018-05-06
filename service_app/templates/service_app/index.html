@@ -39,7 +39,7 @@
                     data-y="262"
                     >
 
-                    <h2><a target="_top" href="http://themeforest.net/item/carservice-mechanic-auto-shop-template/12332985?ref=QuanticaLabs" title="MAKE YOUR CAR LAST LONGER">ПРОДЛИТЕ ЖИЗНЬ ВАЖЕГО АВТОМОБИЛЯ</a></h2>
+                    <h2><a target="_top" href="" title="MAKE YOUR CAR LAST LONGER">ПРОДЛИТЕ ЖИЗНЬ ВАЖЕГО АВТОМОБИЛЯ</a></h2>
                 </div>
                 <!-- LAYER 03 -->
                 <div class="tp-caption"
@@ -58,7 +58,7 @@
                     >
 
                     <div class="align-center">
-                        <a target="_top" class="more simple" href="{% url 'appointment' %}"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
+                        <a target="_top" class="more simple" href="{% if user.is_authenticated %} {% url 'appointment' pk=user.id %} {% else %} {% url 'login'%}?next={{request.path}}{% endif %}"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
                     </div>
                 </div>
                 <!-- / -->
@@ -92,7 +92,7 @@
                     data-transform_in="x:0;y:40;o:0;s:1200;e:easeInOutExpo;"
                     data-transform_out="x:0;y:0;o:0;s:500;e:easeInOutExpo;"-->
 
-                    <h2><a target="_top" href="http://themeforest.net/item/carservice-mechanic-auto-shop-template/12332985?ref=QuanticaLabs" title="MAKE YOUR CAR LAST LONGER">ШИНОМОНТАЖ</a></h2>
+                    <h2><a target="_top" href="" title="MAKE YOUR CAR LAST LONGER">ШИНОМОНТАЖ</a></h2>
                 </div>
                 <!-- LAYER 03 -->
                 <div class="tp-caption customin customout"
@@ -119,7 +119,7 @@
                     data-transform_out="x:0;y:0;o:0;s:500;e:easeInOutExpo;"-->
 
                     <div class="align-center">
-                        <a target="_top" class="more simple" href="{% url 'appointment' %}" title="PURCHASE TEMPLATE"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
+                        <a target="_top" class="more simple" href="{% if user.is_authenticated %} {% url 'appointment' pk=user.id %} {% else %} {% url 'login'%}?next={{request.path}}{% endif %}" title="PURCHASE TEMPLATE"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
                     </div>
                 </div>
                 <!-- / -->
@@ -154,7 +154,7 @@
                     data-transform_in="x:0;y:40;o:0;s:1200;e:easeInOutExpo;"
                     data-transform_out="x:0;y:0;o:0;s:500;e:easeInOutExpo;"-->
 
-                    <h2><a target="_top" href="http://themeforest.net/item/carservice-mechanic-auto-shop-template/12332985?ref=QuanticaLabs" title="MAKE YOUR CAR LAST LONGER">ЭКСПЕРТНЫЕ ТЕХНИКИ, КОНКУРЕНТНЫЕ ЦЕНЫ</a></h2>
+                    <h2><a target="_top" href="" title="MAKE YOUR CAR LAST LONGER">ЭКСПЕРТНЫЕ ТЕХНИКИ, КОНКУРЕНТНЫЕ ЦЕНЫ</a></h2>
                 </div>
                 <!-- LAYER 03 -->
                 <div class="tp-caption customin customout"
@@ -181,7 +181,7 @@
                     data-transform_out="x:0;y:0;o:0;s:500;e:easeInOutExpo;"-->
 
                     <div class="align-center">
-                        <a target="_top" class="more simple" href="{% url 'appointment' %}" title="PURCHASE TEMPLATE"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
+                        <a target="_top" class="more simple" href="{% if user.is_authenticated %} {% url 'appointment' pk=user.id %} {% else %} {% url 'login'%}?next={{request.path}}{% endif %}" title="PURCHASE TEMPLATE"><span>ОСТАВИТЬ ЗАЯВКУ</span></a>
                     </div>
                 </div>
                 <!-- / -->

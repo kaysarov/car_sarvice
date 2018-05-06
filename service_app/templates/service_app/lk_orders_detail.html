@@ -1,0 +1,36 @@
+{% extends 'service_app/lk.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block lk_content %}
+
+<div class="column column-3-4">
+<h3 class="row align-center">Детали заказа № {{id}}</h3>
+		<table class="margin-top-20">
+			<tbody>
+				<tr>
+					<th>Вид работ</th>
+					<th>Количество</th>
+					<th>Начало ремонта</th>
+					<th>Конец ремонта</th>
+					<th>Ответственный сотрудник</th>
+					<th>Статус</th>
+				</tr>
+				{% for i in orders  %}
+				<tr>
+					<th>{{i.job}}</a></th>
+					<th>{{i.number}}</a></th>
+					<th>{{i.registration_date}}</th>
+					<th>{{i.execution_date}}</th>
+					<th>{{i.employee}}</th>
+					<th>{% if i.status %}Выполнено {%else%} Не выполнено{%endif%}</th>
+				</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+</div>
+{% endblock %}
