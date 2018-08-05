@@ -1,3 +1,3 @@
 ВКР на тему разработка web-портала автосервиса.
 
-Презентация доступна по ссылке: https://github.com/kaysarov/car_service/blob/master/Презентация%20ВКР%2C%20Кайсаров%20ИДБ-14-13.pptx
+Презентация доступна по ссылке: https://github.com/kaysarov/car_service/blob/master/presentation.pptx
